@@ -1,0 +1,19 @@
+{
+  "name": "w-slide",
+  "version": "0.0.1",
+  "dependencies": {
+    "axios": "^0.21.0",
+    "isomorphic-fetch": "^2.2.1",
+    "next": "^11.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sass": "^1.55.0"
+  },
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "aestrada7",
+  "license": "ISC"
+}
