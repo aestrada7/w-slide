@@ -25,6 +25,8 @@ const Index = ({ imageURLs }) => {
         <React.Fragment>
             <div className="image-container">
                 <ImageCarousel seconds="10" images={imageURLs}></ImageCarousel>
+            </div>
+            <div className="time-container">
                 <div className="time">{time.getHours()}<span className="colon">:</span>{formatMinutes(time.getMinutes())}</div>
                 <div className="date">{dateStr}</div>
             </div>

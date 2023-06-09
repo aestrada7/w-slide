@@ -1,65 +1,75 @@
+@font-face {
+    font-family: 'SegoeL';
+    src: url('segoeuil.ttf') format('truetype');
+    font-weight: 400;
+}
+
 body {
     margin: 0;
     overflow: hidden;
 }
 
-.time {
-    font-family: 'Segoe UI Light';
-    font-size: 130px;
-    padding-top: 750px;
-    margin-left: 50px;
-    color: #fff;
-}
+.time-container {
+    position: absolute;
+    bottom: 50px;
+    left: 50px;
 
-.date {
-    font-family: 'Segoe UI Light';
-    font-size: 80px;
-    margin-left: 50px;
-    color: #fff;
-}
+    .time {
+        font-family: 'SegoeL';
+        font-size: 8.125rem;
+        //font-size: 7vw;
+        color: #fff;
 
-.colon {
-    position: relative;
-    top: -10px;
-}
-
-.image-container {
-    width: 1920px;
-    height: 1080px;
-    background-color: transparent;
-}
-
-.image {
-    img {
-        position: absolute;
-        z-index: -1;
-    }
-
-    @for $i from 1 through 20 {
-        .animation-#{$i} {
-            animation: grow #{$i}000ms ease-out infinite;
+        .colon {
+            position: relative;
+            top: -0.625rem;
         }
     }
     
-    .last-image {
-        z-index: -2;
-        transform: scale(1.1);
+    .date {
+        font-family: 'SegoeL';
+        font-size: 5rem;
+        color: #fff;
+    }
+}
+
+.image-container {
+    width: 100%;
+    background-color: transparent;
+
+    .image {
+        img {
+            position: absolute;
+            z-index: -1;
+            max-width: 100%;
+        }
+    
+        @for $i from 1 through 20 {
+            .animation-#{$i} {
+                animation: grow #{$i}000ms ease-out infinite;
+            }
+        }
+        
+        .last-image {
+            z-index: -2;
+            transform: scale(1.1);
+        }
     }
 }
 
 @keyframes grow {
     0% {
         transform: scale(1);
-        left: -1920px;
+        left: -100%;
     }
 
     10% {
         transform: scale(1);
-        left: 0px;
+        left: 0;
     }
 
     100% {
         transform: scale(1.1);
-        left: 0px;
+        left: 0;
     }
 }

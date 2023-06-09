@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 const ImageCarousel = ({ seconds, images }) => {
     const [ currentImage, setCurrentImage ] = useState(null);
     const [ lastImage, setLastImage ] = useState(null);
+    const [ randomIdx, setRandomIdx ] = useState(0);
 
     useEffect(() => {
         if (!images || !images.length) {
@@ -12,13 +13,10 @@ const ImageCarousel = ({ seconds, images }) => {
         setCurrentImage(images[0]);
     }, []);
 
-    useEffect(() => {
-        const randomImageIndex = Math.floor(Math.random() * images.length);
-        setCurrentImage(images[randomImageIndex]);
-    }, [ lastImage ]);
-
     let nextImage = () => {
+        setRandomIdx(Math.floor(Math.random() * images.length));
         setLastImage(currentImage);
+        setCurrentImage(images[randomIdx]);
     }
 
     return(
