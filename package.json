@@ -1,6 +1,6 @@
 {
   "name": "w-slide",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "dependencies": {
     "axios": "^0.21.0",
     "isomorphic-fetch": "^2.2.1",

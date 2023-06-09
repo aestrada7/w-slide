@@ -44,10 +44,14 @@ const Index = ({ imageURLs }) => {
 Index.getInitialProps = async({}) => {
     let imageURLs = [];
 
-    const fs = require('fs');
-    fs.readdirSync('./public/temp/').forEach(file => {
-        imageURLs.push(`./temp/${file}`);
-    });
+    if(process.env.DEPLOYMENT === 'LOCAL') {
+        const fs = require('fs');
+        fs.readdirSync('./public/temp/').forEach(file => {
+            imageURLs.push(`./temp/${file}`);
+        });
+    } else if(process.env.DEPLOYMENT === 'VERCEL') {
+        imageURLs = [ './temp/945950.jpg', './temp/Wallpaper-1920x1080-4k.jpg', './temp/wp8172556.jpg' ]
+    }
 
     return { imageURLs };
 }
