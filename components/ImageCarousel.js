@@ -24,7 +24,7 @@ const ImageCarousel = ({ seconds, images }) => {
             { currentImage && (
                 <div className="image">
                     <img className={`animation-${seconds}`} src={currentImage} onAnimationIteration={() => nextImage()} />
-                    <img className="last-image" src={lastImage}></img>
+                    <img className="last-image" src={lastImage} />
                 </div>
             )}
         </React.Fragment>

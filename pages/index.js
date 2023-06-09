@@ -5,6 +5,7 @@ const Index = ({ imageURLs }) => {
     const options = { weekday: 'long', month: 'long', day: 'numeric' };
     const [ time, setTime ] = useState(new Date());
     const [ dateStr, setDateStr ] = useState(time.toLocaleDateString('en-US', options));
+    const [ isFullScreen, setIsFullScreen ] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -21,8 +22,14 @@ const Index = ({ imageURLs }) => {
         return (mins < 10) ? '0' + mins : mins;
     }
 
+    let goFullScreen = () => {
+        setIsFullScreen(true);
+        document.querySelector('body').requestFullscreen();
+    }
+
     return(
         <React.Fragment>
+            { !isFullScreen ? <button className="full-screen" onClick={() => goFullScreen()}>Enter Full Screen</button> : '' }
             <div className="image-container">
                 <ImageCarousel seconds="10" images={imageURLs}></ImageCarousel>
             </div>
@@ -35,7 +42,13 @@ const Index = ({ imageURLs }) => {
 }
 
 Index.getInitialProps = async({}) => {
-    let imageURLs = [ './temp/945950.jpg', './temp/Wallpaper-1920x1080-4k.jpg', './temp/wp8172556.jpg' ]
+    let imageURLs = [];
+
+    const fs = require('fs');
+    fs.readdirSync('./public/temp/').forEach(file => {
+        imageURLs.push(`./temp/${file}`);
+    });
+
     return { imageURLs };
 }
 
