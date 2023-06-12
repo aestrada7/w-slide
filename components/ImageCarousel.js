@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Mosaic from './Mosaic';
+import { aspectRatio } from '../services/tools';
 
 const ImageCarousel = ({ seconds, images }) => {
     const PRELOADED_IMAGES = 5;
@@ -30,7 +31,8 @@ const ImageCarousel = ({ seconds, images }) => {
 
         image.onload = () => {
             image.orientation = image.width > image.height ? 'horizontal' : 'vertical';
-            setLoadedImages([...loadedImages, { src: image.src, width: image.width, height: image.height, orientation: image.orientation }]);
+            image.ratio = aspectRatio(image.width, image.height);
+            setLoadedImages([...loadedImages, { src: image.src, width: image.width, height: image.height, orientation: image.orientation, ratio: image.ratio }]);
         }
     };
 
@@ -42,24 +44,27 @@ const ImageCarousel = ({ seconds, images }) => {
         setLoadedImages( loadedImages.slice(toRemove) );
     };
 
+    let getClassName = (imageList) => {
+        if(imageList[0].orientation === 'horizontal') {
+            return 'full-width';
+        } else if(imageList[0].orientation === 'vertical') {
+            if(imageList[1].orientation === 'vertical' && imageList[2].orientation === 'vertical') {
+                return 'side-3';
+            }
+            return 'side-by-side';
+        }
+    }
+
     return (
         <React.Fragment>
             { lastImages.length > 0 && (
                 <div className="last-image">
-                    { lastImages[0].orientation === 'horizontal' ?
-                        <Mosaic className="full-width" images={lastImages}></Mosaic>
-                    :
-                        <Mosaic className="side-by-side" images={lastImages}></Mosaic>
-                    }
+                    <Mosaic className={getClassName(lastImages)} images={lastImages}></Mosaic>
                 </div>
             )}
             { loadedImages.length > MIN_PRELOADED_IMAGES && (
                 <div className="image">
-                    { loadedImages[0].orientation === "horizontal" ?
-                        <Mosaic seconds={seconds} className="full-width" images={loadedImages} callback={nextImage}></Mosaic>
-                    :
-                        <Mosaic seconds={seconds} className="side-by-side" images={loadedImages} callback={nextImage}></Mosaic>
-                    }
+                    <Mosaic seconds={seconds} className={getClassName(loadedImages)} images={loadedImages} callback={nextImage}></Mosaic>
                 </div>
             )}
         </React.Fragment>
