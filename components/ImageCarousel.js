@@ -20,7 +20,6 @@ const ImageCarousel = ({ seconds, images }) => {
         if(loadedImages.length < PRELOADED_IMAGES) {
             preloadImage();
         }
-        console.log(loadedImages);
     }, [ loadedImages ]);
 
     const preloadImage = () => {
@@ -48,9 +47,10 @@ const ImageCarousel = ({ seconds, images }) => {
         if(imageList[0].orientation === 'horizontal') {
             return 'full-width';
         } else if(imageList[0].orientation === 'vertical') {
+            /*
             if(imageList[1].orientation === 'vertical' && imageList[2].orientation === 'vertical') {
                 return 'side-3';
-            }
+            }*/
             return 'side-by-side';
         }
     }
