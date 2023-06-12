@@ -21,6 +21,7 @@ body {
     margin: 5px;
     background-color: #fff;
     border: #000;
+    z-index: 5;
 }
 
 .time-container {
@@ -50,21 +51,32 @@ body {
     width: 100%;
     background-color: transparent;
 
-    .image {
-        img {
-            position: absolute;
-            z-index: -1;
-            max-width: 100%;
-        }
-    
+    .image, .last-image {
         @for $i from 1 through 20 {
             .animation-#{$i} {
                 animation: grow #{$i}000ms ease-out infinite;
             }
         }
         
-        .last-image {
-            z-index: -2;
+        .full-width {
+            position: absolute;
+        }
+
+        .side-by-side {
+            position: absolute;
+            display: flex;
+
+            img {
+                position: relative;
+                max-width: 50vw;
+            }
+        }
+    }
+
+    .last-image {
+        left: 0;
+
+        .full-width, .side-by-side {
             transform: scale(1.1);
         }
     }
@@ -73,16 +85,19 @@ body {
 @keyframes grow {
     0% {
         transform: scale(1);
-        left: -100%;
+        left: -100vw;
+        top: 0;
     }
 
     10% {
         transform: scale(1);
         left: 0;
+        top: 0;
     }
 
     100% {
         transform: scale(1.1);
         left: 0;
+        top: 0;
     }
 }
