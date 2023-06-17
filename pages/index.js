@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import ImageCarousel from '../components/ImageCarousel';
+import ImageCarouselLow from '../components/ImageCarouselLow';
 
-const Index = ({ imageURLs }) => {
+const Index = ({ imageURLs, lowmem }) => {
     const options = { weekday: 'long', month: 'long', day: 'numeric' };
     const [ time, setTime ] = useState(new Date());
     const [ dateStr, setDateStr ] = useState(time.toLocaleDateString('en-US', options));
@@ -31,7 +32,11 @@ const Index = ({ imageURLs }) => {
         <React.Fragment>
             { !isFullScreen ? <button className="full-screen" onClick={() => goFullScreen()}>Enter Full Screen</button> : '' }
             <div className="image-container">
-                <ImageCarousel seconds="10" images={imageURLs}></ImageCarousel>
+                { !lowmem ? 
+                    <ImageCarousel seconds="10" images={imageURLs}></ImageCarousel>
+                :
+                    <ImageCarouselLow seconds="10" images={imageURLs}></ImageCarouselLow>
+                }
             </div>
             <div className="time-container">
                 <div className="time">{time.getHours()}<span className="colon">:</span>{formatMinutes(time.getMinutes())}</div>
@@ -41,7 +46,8 @@ const Index = ({ imageURLs }) => {
     )
 }
 
-Index.getInitialProps = async({}) => {
+Index.getInitialProps = async({ query }) => {
+    let lowmem = query?.lowmem === 'true';
     let imageURLs = [];
 
     if(process.env.DEPLOYMENT === 'LOCAL') {
@@ -53,7 +59,7 @@ Index.getInitialProps = async({}) => {
         imageURLs = [ './temp/945950.jpg', './temp/Wallpaper-1920x1080-4k.jpg', './temp/wp8172556.jpg' ]
     }
 
-    return { imageURLs };
+    return { imageURLs, lowmem };
 }
 
 export default Index;

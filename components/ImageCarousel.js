@@ -20,6 +20,7 @@ const ImageCarousel = ({ seconds, images }) => {
         if(loadedImages.length < PRELOADED_IMAGES) {
             preloadImage();
         }
+        console.log(loadedImages);
     }, [ loadedImages ]);
 
     const preloadImage = () => {
