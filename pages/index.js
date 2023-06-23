@@ -11,13 +11,16 @@ const Index = ({ imageURLs, lowmem }) => {
     useEffect(() => {
         const interval = setInterval(() => {
             setTime(new Date());
-            setDateStr(time.toLocaleDateString('en-US', options))
         }, 1000);
     
         return () => {
             clearInterval(interval);
         };
     }, []);
+
+    useEffect(() => {
+        setDateStr(time.toLocaleDateString('en-US', options));
+    }, [ time ]);
 
     let formatMinutes = (mins) => {
         return (mins < 10) ? '0' + mins : mins;

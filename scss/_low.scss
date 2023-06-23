@@ -8,16 +8,22 @@
     }
 
     .container {
-        width: 100vw;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
         height: 100vh;
         text-align: center;
     }
 
     .last-container {
         position: absolute;
-        top: 0;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
         height: 100vh;
-        width: 100vw;
         text-align: center;
         z-index: -1;
 

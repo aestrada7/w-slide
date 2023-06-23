@@ -19,7 +19,7 @@ navigate to the same URL but add the `lowmem` query parameter and set it to `tru
 
 ## Known Bugs / Upcoming Features
 
-### As of version 0.0.8
+### As of version 0.0.9
 * If images are particularly large, the animation might play with the same image that was already loaded and then abruptly change.
 * The `lowmem` option was added as a patch since low powered devices can't handle the memory output of loading multiple images at the same time.
 * Vercel integration and ability to use cloud based folders instead of local folders is upcoming.
