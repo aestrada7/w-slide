@@ -13,7 +13,7 @@ export default async function messageHandler(req, res) {
         case 'GET':
             const auth = new google.auth.JWT(
                 process.env.GD_CLIENT_EMAIL, null,
-                JSON.parse(process.env.GD_PRIVATE_KEY), scopes
+                process.env.GD_PRIVATE_KEY, scopes
             );
             const drive = google.drive({ version: "v3", auth });
         
