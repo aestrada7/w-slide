@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ImageCarousel from '../components/ImageCarousel';
 import ImageCarouselLow from '../components/ImageCarouselLow';
+import { getImages } from '../services/Google';
 
 const Index = ({ imageURLs, lowmem }) => {
     const options = { weekday: 'long', month: 'long', day: 'numeric' };
@@ -49,7 +50,9 @@ const Index = ({ imageURLs, lowmem }) => {
     )
 }
 
-Index.getInitialProps = async({ query }) => {
+export default Index;
+
+export const getServerSideProps = async({ query }) => {
     let lowmem = query?.lowmem === 'true';
     let imageURLs = [];
 
@@ -59,10 +62,8 @@ Index.getInitialProps = async({ query }) => {
             imageURLs.push(`./temp/${file}`);
         });
     } else if(process.env.DEPLOYMENT === 'VERCEL') {
-        imageURLs = [ './temp/945950.jpg', './temp/Wallpaper-1920x1080-4k.jpg', './temp/wp8172556.jpg' ]
+        imageURLs = await getImages();
     }
 
-    return { imageURLs, lowmem };
+    return { props: { imageURLs, lowmem } };
 }
-
-export default Index;

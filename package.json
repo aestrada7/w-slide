@@ -1,8 +1,9 @@
 {
   "name": "w-slide",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "dependencies": {
     "axios": "^0.21.0",
+    "googleapis": "^118.0.0",
     "isomorphic-fetch": "^2.2.1",
     "next": "^11.1.0",
     "react": "^17.0.2",
