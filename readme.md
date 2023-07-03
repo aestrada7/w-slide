@@ -24,8 +24,10 @@ Current integration grabs images from Google Drive. In order to set this up:
 2. Create a Service Account within the Google Cloud Console
 3. Ensure the folder that was created is shared with the service account that was just created
 4. Create a Key for the Service Account in JSON format and download it
-5. Rename it as `credentials.json` and place it at the root of the repository
-6. Upload it manually to your Vercel project
+5. Create additional environment variables to store certain information that will be required for GD: `GD_PROJECT_ID`, `GD_PRIVATE_KEY_ID`, 
+   `GD_PRIVATE_KEY` and `GD_CLIENT_EMAIL`
+6. Copy the information from the downloaded version into each of these new environment variables.
+7. Ensure `GD_PRIVATE_KEY` is enclosed in single and double quotes, e.g. `'"-----BEGIN..."'`
 
 ## Options
 

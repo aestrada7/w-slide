@@ -1,5 +1,4 @@
 const { google } = require('googleapis');
-const credentials = require('../../../credentials.json');
 
 const scopes = [
     'https://www.googleapis.com/auth/drive',
@@ -13,8 +12,8 @@ export default async function messageHandler(req, res) {
     switch(method) {
         case 'GET':
             const auth = new google.auth.JWT(
-                credentials.client_email, null,
-                credentials.private_key, scopes
+                process.env.GD_CLIENT_EMAIL, null,
+                JSON.parse(process.env.GD_PRIVATE_KEY), scopes
             );
             const drive = google.drive({ version: "v3", auth });
         
