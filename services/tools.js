@@ -7,3 +7,7 @@ export const aspectRatio = (width, height)  => {
 
     return `${width / divisor}:${height / divisor}`;
 };
+
+export const shuffle = (array) => { 
+    return array.sort(() => Math.random() - 0.5); 
+};

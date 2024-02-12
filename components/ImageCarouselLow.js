@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { shuffle } from '../services/tools';
 
 const ImageCarouselLow = ({ seconds, images }) => {
     const [ currentImage, setCurrentImage ] = useState(null);
@@ -9,14 +10,17 @@ const ImageCarouselLow = ({ seconds, images }) => {
         if (!images || !images.length) {
             return;
         }
+        shuffle(images);
 
         setCurrentImage(images[0]);
+        setRandomIdx(0);
     }, []);
 
     let nextImage = () => {
-        setRandomIdx(Math.floor(Math.random() * images.length));
+        let nextImgId = randomIdx >= images.length - 1 ? 0 : randomIdx + 1;
+        setRandomIdx(nextImgId);
         setLastImage(currentImage);
-        setCurrentImage(images[randomIdx]);
+        setCurrentImage(images[nextImgId]);
     }
 
     return(

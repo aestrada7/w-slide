@@ -5,3 +5,4 @@ public/images/dallara-ir18
 data/
 .env.local
 credentials.json
+*.code-workspace
